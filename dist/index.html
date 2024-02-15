@@ -24,8 +24,23 @@
             </div>
         </div>
 
-        <div id="container">
+        <div id="todo-modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <form action="" method='get' id="todo-form">
+                    <fieldset>
+                        <legend>Add a todo item</legend>
+                        <label for="todo-title">Todo Title</label>
+                        <input id="todo-title" name="todo-title" type="text">
+                        <button id="submit-todo">Add Todo</button>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+        <div id="default-section">
+        </div>
 
+        <div id="container">
         </div>
     </main>
     <script src="main.js"></script>

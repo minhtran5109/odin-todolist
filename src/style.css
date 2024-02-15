@@ -39,6 +39,11 @@ body {
     cursor: pointer;
 }
 
+#default-section {
+    height: 20vh;
+    background-color: lightpink;
+}
+
 #container {
     background-color: lightcyan;
     padding: 50px;
