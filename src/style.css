@@ -38,3 +38,18 @@ body {
     text-decoration: none;
     cursor: pointer;
 }
+
+#container {
+    background-color: lightcyan;
+    padding: 50px;
+    height: 100vh;
+}
+
+.card {
+    width: 20vw;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    padding: 20px;
+}
