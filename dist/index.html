@@ -16,8 +16,10 @@
                 <form action="" method='get' id="project-form">
                     <fieldset>
                         <legend>Add a new Project</legend>
-                        <label for="project-title">Project Title</label>
-                        <input id="project-title" name="project-title" type="text">
+                        <div class="form-row">
+                            <label for="project-title">Project Title</label>
+                            <input id="project-title" name="project-title" type="text">
+                        </div>
                         <button id="submit-project">Add</button>
                     </fieldset>
                 </form>
@@ -30,14 +32,37 @@
                 <form action="" method='get' id="todo-form">
                     <fieldset>
                         <legend>Add a todo item</legend>
-                        <label for="todo-title">Todo Title</label>
-                        <input id="todo-title" name="todo-title" type="text">
+
+                        <div class="form-row">
+                            <label for="todo-title">Todo Title</label>
+                            <input id="todo-title" name="todo-title" type="text">
+                        </div>
+
+                        <div class="form-row">
+                            <label for="todo-description">Description</label>
+                            <textarea id="todo-description" name="todo-description"></textarea>
+                        </div>
+
+                        <div class="form-row">
+                            <label for="todo-date">Due Date</label>
+                            <input id="todo-date" name="todo-date" type="date">
+                        </div>
+
+                        <div class="form-row">
+                            <label for="todo-priority">Priority</label>
+                            <select id="todo-priority" name="todo-priority">
+                                <option value="low">Low</option>
+                                <option value="medium">Medium</option>
+                                <option value="high">High</option>
+                            </select>
+                        </div>
                         <button id="submit-todo">Add Todo</button>
                     </fieldset>
                 </form>
             </div>
         </div>
         <div id="default-section">
+            This is where a default project will be displayed
         </div>
 
         <div id="container">

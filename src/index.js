@@ -1,6 +1,7 @@
 import './style.css';
 
 const projects = [];
+let currentProject = [];
 
 const container = document.querySelector("#container");
 const addProjectBtn = document.getElementById("add-project");
@@ -24,8 +25,12 @@ class TodoItem {
 class Project {
     constructor(title, todos) {
         this.title = title;
-        this.todo = todos;
+        this.todos = todos;
     }
+}
+
+Project.prototype.addTask = function(todo) {
+    this.todos.push(todo);
 }
 
 function addProject() {
@@ -49,13 +54,14 @@ function render() {
         let addTodoBtn = document.createElement('button');
         addTodoBtn.textContent = "Add Task";
         addTodoBtn.classList.add("add-todo");
-        addTodoBtn.addEventListener('click', openTodoModal);
+        addTodoBtn.addEventListener('click', () => openTodoModal(project));
         card.appendChild(addTodoBtn);
 
         container.appendChild(card);
     })
 }
 
+//Project
 addProjectBtn.addEventListener('click', () => {
     projectModal.style.display = "block";
 });
@@ -70,17 +76,44 @@ submitProject.addEventListener('click', (e) => {
     e.preventDefault();
     addProject();
     console.log(projects);
-    projectModal.style.display = "none";
+    closeModal(projectModal);
     render();
 })
 
+function setCurrentProject(project) {
+    currentProject = project;
+}
+
+// Todo
 let todoModal = document.getElementById("todo-modal");
 
-function openTodoModal() {
+function openTodoModal(project) {
+    setCurrentProject(project);
     todoModal.style.display = "block";
+    console.log(currentProject);
+    // console.log("This is project " + project.title)
 }
 
 const modalCloseBtn = closeBtns[1];
 modalCloseBtn.addEventListener('click', () => closeModal(todoModal));
+
+function addTodo() {
+    let todoTitle = document.getElementById("todo-title").value;
+    let todoDescription = document.getElementById("todo-description").value;
+    let todoDueDate = document.getElementById("todo-date").value;
+    let todoPriority = document.getElementById("todo-priority").value;
+
+    let newTodo = new TodoItem(todoTitle, todoDescription, todoDueDate, todoPriority);
+    currentProject.addTask(newTodo);
+}
+
+const submitTodo = document.getElementById("submit-todo");
+submitTodo.addEventListener('click', (e) => {
+    e.preventDefault();
+    addTodo();
+    closeModal(todoModal)
+    console.log(currentProject);
+})
+
 
 render();
