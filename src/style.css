@@ -79,3 +79,7 @@ body {
     /* height: 200px; */
     height: initial;
 }
+
+#default-section input[type=checkbox]:checked + label.strikethrough {
+    text-decoration: line-through;
+}

@@ -38,6 +38,7 @@ function addProject() {
     //change this later?
     let newProject = new Project(projectTitle, []);
     projects.push(newProject);
+    setCurrentProject(newProject)
 }
 
 function render() {
@@ -59,6 +60,30 @@ function render() {
 
         container.appendChild(card);
     })
+
+    const defaultSection = document.getElementById("default-section");
+    defaultSection.innerHTML = "";
+    if (projects.length) {
+        // console.log('HEY');
+        let title = document.createElement('h2')
+        title.textContent= currentProject.title;
+        defaultSection.appendChild(title);
+        
+        let todosElement = document.createElement('ul');
+        let todos = currentProject.todos;
+        if (todos.length) {
+            todos.forEach((todo, index) => {
+                let todoRow = document.createElement('li');
+                todoRow.innerHTML = `
+                <input type="checkbox" id="todo-${index}" name="todo-${index}"/>
+                <label for="todo-${index}" class="strikethrough">${todo.title}</label>
+                `
+                todosElement.appendChild(todoRow);
+            })
+        }
+        defaultSection.appendChild(todosElement);
+    }
+
 }
 
 //Project
@@ -90,7 +115,7 @@ let todoModal = document.getElementById("todo-modal");
 function openTodoModal(project) {
     setCurrentProject(project);
     todoModal.style.display = "block";
-    console.log(currentProject);
+    // console.log(currentProject);
     // console.log("This is project " + project.title)
 }
 
@@ -111,7 +136,8 @@ const submitTodo = document.getElementById("submit-todo");
 submitTodo.addEventListener('click', (e) => {
     e.preventDefault();
     addTodo();
-    closeModal(todoModal)
+    closeModal(todoModal);
+    render();
     console.log(currentProject);
 })
 
