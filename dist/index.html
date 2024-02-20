@@ -61,6 +61,43 @@
                 </form>
             </div>
         </div>
+
+        <div id="todo-edit-modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <form action="" method='get' id="todo-edit-form">
+                    <fieldset>
+                        <legend>Edit this todo</legend>
+
+                        <div class="form-row">
+                            <label for="todo-edit-title">Todo Title</label>
+                            <input id="todo-edit-title" name="todo-edit-title" type="text">
+                        </div>
+
+                        <div class="form-row">
+                            <label for="todo-edit-description">Description</label>
+                            <textarea id="todo-edit-description" name="todo-edit-description"></textarea>
+                        </div>
+
+                        <div class="form-row">
+                            <label for="todo-edit-date">Due Date</label>
+                            <input id="todo-edit-date" name="todo-edit-date" type="date">
+                        </div>
+
+                        <div class="form-row">
+                            <label for="todo-edit-priority">Priority</label>
+                            <select id="todo-edit-priority" name="todo-edit-priority">
+                                <option value="low">Low</option>
+                                <option value="medium">Medium</option>
+                                <option value="high">High</option>
+                            </select>
+                        </div>
+                        <button id="submit-todo-edit">Save</button>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+        
         <div id="default-section">
         </div>
 

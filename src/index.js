@@ -2,7 +2,7 @@ import './style.css';
 
 const projects = [];
 let currentProject = [];
-
+let currentTodo = {};
 const container = document.querySelector("#container");
 const addProjectBtn = document.getElementById("add-project");
 const projectModal = document.getElementById("project-modal");
@@ -47,6 +47,7 @@ function render() {
     projects.forEach((project, index) => {
         let card = document.createElement('div');
         card.classList.add("card");
+        card.setAttribute('id', `project-${index}`)
 
         let title = document.createTextNode(project.title);
         card.appendChild(title);
@@ -64,7 +65,6 @@ function render() {
     const defaultSection = document.getElementById("default-section");
     defaultSection.innerHTML = "";
     if (projects.length) {
-        // console.log('HEY');
         let title = document.createElement('h2')
         title.textContent= currentProject.title;
         defaultSection.appendChild(title);
@@ -78,6 +78,20 @@ function render() {
                 <input type="checkbox" id="todo-${index}" name="todo-${index}"/>
                 <label for="todo-${index}" class="strikethrough">${todo.title}</label>
                 `
+                let btns = document.createElement('span')
+                let editBtn = document.createElement('button')
+                editBtn.textContent="Edit"
+                editBtn.classList.add('edit-todo-btn');
+                editBtn.addEventListener("click", () => editTodo(index))
+
+                let deleteBtn = document.createElement('button')
+                deleteBtn.textContent="Delete"
+                
+                btns.appendChild(editBtn);
+                btns.appendChild(deleteBtn);
+
+                todoRow.appendChild(btns);
+
                 todosElement.appendChild(todoRow);
             })
         }
@@ -87,11 +101,15 @@ function render() {
 }
 
 //Project
+let projectForm = document.getElementById('project-form');
 addProjectBtn.addEventListener('click', () => {
     projectModal.style.display = "block";
 });
 
 function closeModal(currentModal) {
+    todoForm.reset();
+    projectForm.reset();
+    // editTodoForm.reset();
     currentModal.style.display = "none";
 }
 
@@ -100,7 +118,6 @@ projectCloseBtn.addEventListener('click', () => closeModal(projectModal));
 submitProject.addEventListener('click', (e) => {
     e.preventDefault();
     addProject();
-    console.log(projects);
     closeModal(projectModal);
     render();
 })
@@ -109,14 +126,12 @@ function setCurrentProject(project) {
     currentProject = project;
 }
 
-// Todo
+// Create Todo
 let todoModal = document.getElementById("todo-modal");
-
+let todoForm = document.getElementById('todo-form');
 function openTodoModal(project) {
     setCurrentProject(project);
     todoModal.style.display = "block";
-    // console.log(currentProject);
-    // console.log("This is project " + project.title)
 }
 
 const modalCloseBtn = closeBtns[1];
@@ -130,6 +145,8 @@ function addTodo() {
 
     let newTodo = new TodoItem(todoTitle, todoDescription, todoDueDate, todoPriority);
     currentProject.addTask(newTodo);
+
+    todoForm.reset();
 }
 
 const submitTodo = document.getElementById("submit-todo");
@@ -139,6 +156,41 @@ submitTodo.addEventListener('click', (e) => {
     closeModal(todoModal);
     render();
     console.log(currentProject);
+})
+
+// Edit Todo
+const editTodoModal = document.getElementById("todo-edit-modal");
+const saveEditTodoBtn = document.getElementById("submit-todo-edit");
+const editTodoForm = document.getElementById("todo-edit-form");
+let todoTitle = document.getElementById("todo-edit-title");
+let todoDescription = document.getElementById("todo-edit-description");
+let todoDueDate = document.getElementById("todo-edit-date");
+let todoPriority = document.getElementById("todo-edit-priority");
+const editTodoCloseBtn = closeBtns[2];
+editTodoCloseBtn.addEventListener('click', () => closeModal(editTodoModal));
+
+let currentIndex = 0;
+function editTodo(index) {
+    currentIndex = index;
+    console.log("From outside: " + index);
+    currentTodo = currentProject.todos[index]
+    editTodoModal.style.display = "block";
+
+    todoTitle.value = currentTodo.title;
+    todoDescription.value = currentTodo.description;
+    todoDueDate.value = currentTodo.dueDate;
+    todoPriority.value = currentTodo.priority;
+}
+
+saveEditTodoBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    currentProject.todos[currentIndex].title = todoTitle.value;
+    currentProject.todos[currentIndex].description = todoDescription.value;
+    currentProject.todos[currentIndex].dueDate = todoDueDate.value;
+    currentProject.todos[currentIndex].priority = todoPriority.value;
+    closeModal(editTodoModal);
+    console.log(currentProject);
+    render();
 })
 
 
