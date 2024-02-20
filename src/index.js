@@ -84,8 +84,9 @@ function render() {
                 editBtn.classList.add('edit-todo-btn');
                 editBtn.addEventListener("click", () => editTodo(index))
 
-                let deleteBtn = document.createElement('button')
-                deleteBtn.textContent="Delete"
+                let deleteBtn = document.createElement('button');
+                deleteBtn.textContent="Delete";
+                deleteBtn.addEventListener("click", () => deleteTodo(index))
                 
                 btns.appendChild(editBtn);
                 btns.appendChild(deleteBtn);
@@ -193,5 +194,11 @@ saveEditTodoBtn.addEventListener('click', (e) => {
     render();
 })
 
+// Delete Todo
+function deleteTodo(index) {
+    currentProject.todos.splice(index, 1);
+    render();
+    console.log(currentProject);
+}
 
 render();
