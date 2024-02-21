@@ -38,7 +38,7 @@ function addProject() {
     //change this later?
     let newProject = new Project(projectTitle, []);
     projects.push(newProject);
-    setCurrentProject(newProject)
+    setActiveProjectDisplay(projects.length-1);
 }
 
 function render() {
@@ -48,6 +48,7 @@ function render() {
         let card = document.createElement('div');
         card.classList.add("card");
         card.setAttribute('id', `project-${index}`)
+        card.addEventListener('click', (e) => setActiveProjectDisplay(index))
 
         let title = document.createTextNode(project.title);
         card.appendChild(title);
@@ -58,7 +59,7 @@ function render() {
         addTodoBtn.classList.add("add-todo");
         addTodoBtn.addEventListener('click', () => openTodoModal(project));
         card.appendChild(addTodoBtn);
-
+        
         container.appendChild(card);
     })
 
@@ -137,18 +138,29 @@ submitProject.addEventListener('click', (e) => {
     e.preventDefault();
     addProject();
     closeModal(projectModal);
-    render();
+    // render();
 })
 
-function setCurrentProject(project) {
-    currentProject = project;
+function setCurrentProject(index) {
+    currentProject = projects[index];
+    render();
+}
+
+function setActiveProjectDisplay(index) {
+    setCurrentProject(index);
+    let cards = document.getElementsByClassName("card");
+    for(let i = 0; i < cards.length; i++) {
+        cards[i].classList.remove('card-active')
+    }
+    let currentCard = document.getElementById(`project-${index}`)
+    currentCard.classList.add('card-active');
 }
 
 // Create Todo
 let todoModal = document.getElementById("todo-modal");
 let todoForm = document.getElementById('todo-form');
 function openTodoModal(project) {
-    setCurrentProject(project);
+    currentProject = project;
     todoModal.style.display = "block";
 }
 

@@ -60,6 +60,13 @@ body {
     padding: 20px;
 }
 
+/* .card:active {
+    background-color: beige;
+} */
+.card-active {
+    background-color: beige;
+}
+
 .form-row {
     margin-bottom: 20px;
     display: flex;
