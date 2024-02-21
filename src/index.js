@@ -79,6 +79,23 @@ function render() {
                 <label for="todo-${index}" class="strikethrough">${todo.title}</label>
                 `
                 let btns = document.createElement('span')
+                let expandBtn = document.createElement('button')
+                expandBtn.textContent="Expand"
+                expandBtn.classList.add("expand-btn")
+                expandBtn.addEventListener('click', ()=> expandContent(index))
+                todoRow.appendChild(expandBtn);
+
+                let content = document.createElement('div')
+                content.classList.add('content');
+                content.setAttribute('data-id', `${index}`);
+                content.innerHTML = `
+                <div>Due: ${todo.dueDate}</div>
+                <div>Priority: ${todo.priority}</div>
+                <div>
+                    <span>Description:</span>
+                    <p>${todo.description}</p>
+                </div>
+                `
                 let editBtn = document.createElement('button')
                 editBtn.textContent="Edit"
                 editBtn.classList.add('edit-todo-btn');
@@ -90,8 +107,8 @@ function render() {
                 
                 btns.appendChild(editBtn);
                 btns.appendChild(deleteBtn);
-
-                todoRow.appendChild(btns);
+                content.appendChild(btns);
+                todoRow.appendChild(content);
 
                 todosElement.appendChild(todoRow);
             })
@@ -199,6 +216,17 @@ function deleteTodo(index) {
     currentProject.todos.splice(index, 1);
     render();
     console.log(currentProject);
+}
+
+//Expand Todo in details
+function expandContent(index) {
+    currentIndex = index;
+    let content = document.querySelector(`.content[data-id="${index}"]`);
+    if (content.style.display === "block") {
+        content.style.display = "none";
+    } else {
+        content.style.display = "block";
+    }
 }
 
 render();

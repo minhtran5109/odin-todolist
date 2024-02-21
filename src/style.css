@@ -83,3 +83,10 @@ body {
 #default-section input[type=checkbox]:checked + label.strikethrough {
     text-decoration: line-through;
 }
+
+.content {
+    padding: 0 18px;
+    display: none;
+    overflow: hidden;
+    background-color: #f1f1f1;
+}
