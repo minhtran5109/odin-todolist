@@ -3,6 +3,14 @@ import './style.css';
 const projects = [];
 let currentProject = [];
 let currentTodo = {};
+
+// let ps = [];
+// if (!localStorage.getItem('test')){
+//     localStorage.setItem('test', [])
+// }
+// ps = localStorage.getItem('test')
+// console.log(typeof ps)
+
 const container = document.querySelector("#container");
 const addProjectBtn = document.getElementById("add-project");
 const projectModal = document.getElementById("project-modal");
@@ -38,6 +46,8 @@ function addProject() {
     //change this later?
     let newProject = new Project(projectTitle, []);
     projects.push(newProject);
+    // ps.push(newProject)
+    // localStorage.setItem('test', ps)
     setActiveProjectDisplay(projects.length-1);
 }
 
@@ -122,7 +132,7 @@ function render() {
 //Project
 let projectForm = document.getElementById('project-form');
 addProjectBtn.addEventListener('click', () => {
-    projectModal.style.display = "block";
+    projectModal.style.display = "block"; 
 });
 
 function closeModal(currentModal) {
