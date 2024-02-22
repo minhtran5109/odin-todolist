@@ -1,109 +1,117 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ToDo List</title>
-</head>
-<body>
+  </head>
+  <body>
     <main>
-        <h1>To Do List</h1>
+      <h1>To Do List</h1>
 
-        <button id="add-project">Add New Project</button>
-        <div id="project-modal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <form action="" method='get' id="project-form">
-                    <fieldset>
-                        <legend>Add a new Project</legend>
-                        <div class="form-row">
-                            <label for="project-title">Project Title</label>
-                            <input id="project-title" name="project-title" type="text">
-                        </div>
-                        <button id="submit-project">Add</button>
-                    </fieldset>
-                </form>
-            </div>
+      <button id="add-project">Add New Project</button>
+      <div id="project-modal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <form action="" method="get" id="project-form">
+            <fieldset>
+              <legend>Add a new Project</legend>
+              <div class="form-row">
+                <label for="project-title">Project Title</label>
+                <input id="project-title" name="project-title" type="text" />
+              </div>
+              <button id="submit-project">Add</button>
+            </fieldset>
+          </form>
         </div>
+      </div>
 
-        <div id="todo-modal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <form action="" method='get' id="todo-form">
-                    <fieldset>
-                        <legend>Add a todo item</legend>
+      <div id="todo-modal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <form action="" method="get" id="todo-form">
+            <fieldset>
+              <legend>Add a todo item</legend>
 
-                        <div class="form-row">
-                            <label for="todo-title">Todo Title</label>
-                            <input id="todo-title" name="todo-title" type="text">
-                        </div>
+              <div class="form-row">
+                <label for="todo-title">Todo Title</label>
+                <input id="todo-title" name="todo-title" type="text" />
+              </div>
 
-                        <div class="form-row">
-                            <label for="todo-description">Description</label>
-                            <textarea id="todo-description" name="todo-description"></textarea>
-                        </div>
+              <div class="form-row">
+                <label for="todo-description">Description</label>
+                <textarea
+                  id="todo-description"
+                  name="todo-description"
+                ></textarea>
+              </div>
 
-                        <div class="form-row">
-                            <label for="todo-date">Due Date</label>
-                            <input id="todo-date" name="todo-date" type="date">
-                        </div>
+              <div class="form-row">
+                <label for="todo-date">Due Date</label>
+                <input id="todo-date" name="todo-date" type="date" />
+              </div>
 
-                        <div class="form-row">
-                            <label for="todo-priority">Priority</label>
-                            <select id="todo-priority" name="todo-priority">
-                                <option value="low">Low</option>
-                                <option value="medium">Medium</option>
-                                <option value="high">High</option>
-                            </select>
-                        </div>
-                        <button id="submit-todo">Add Todo</button>
-                    </fieldset>
-                </form>
-            </div>
+              <div class="form-row">
+                <label for="todo-priority">Priority</label>
+                <select id="todo-priority" name="todo-priority">
+                  <option value="low">Low</option>
+                  <option value="medium">Medium</option>
+                  <option value="high">High</option>
+                </select>
+              </div>
+              <button id="submit-todo">Add Todo</button>
+            </fieldset>
+          </form>
         </div>
+      </div>
 
-        <div id="todo-edit-modal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <form action="" method='get' id="todo-edit-form">
-                    <fieldset>
-                        <legend>Edit this todo</legend>
+      <div id="todo-edit-modal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <form action="" method="get" id="todo-edit-form">
+            <fieldset>
+              <legend>Edit this todo</legend>
 
-                        <div class="form-row">
-                            <label for="todo-edit-title">Todo Title</label>
-                            <input id="todo-edit-title" name="todo-edit-title" type="text">
-                        </div>
+              <div class="form-row">
+                <label for="todo-edit-title">Todo Title</label>
+                <input
+                  id="todo-edit-title"
+                  name="todo-edit-title"
+                  type="text"
+                />
+              </div>
 
-                        <div class="form-row">
-                            <label for="todo-edit-description">Description</label>
-                            <textarea id="todo-edit-description" name="todo-edit-description"></textarea>
-                        </div>
+              <div class="form-row">
+                <label for="todo-edit-description">Description</label>
+                <textarea
+                  id="todo-edit-description"
+                  name="todo-edit-description"
+                ></textarea>
+              </div>
 
-                        <div class="form-row">
-                            <label for="todo-edit-date">Due Date</label>
-                            <input id="todo-edit-date" name="todo-edit-date" type="date">
-                        </div>
+              <div class="form-row">
+                <label for="todo-edit-date">Due Date</label>
+                <input id="todo-edit-date" name="todo-edit-date" type="date" />
+              </div>
 
-                        <div class="form-row">
-                            <label for="todo-edit-priority">Priority</label>
-                            <select id="todo-edit-priority" name="todo-edit-priority">
-                                <option value="low">Low</option>
-                                <option value="medium">Medium</option>
-                                <option value="high">High</option>
-                            </select>
-                        </div>
-                        <button id="submit-todo-edit">Save</button>
-                    </fieldset>
-                </form>
-            </div>
+              <div class="form-row">
+                <label for="todo-edit-priority">Priority</label>
+                <select id="todo-edit-priority" name="todo-edit-priority">
+                  <option value="low">Low</option>
+                  <option value="medium">Medium</option>
+                  <option value="high">High</option>
+                </select>
+              </div>
+              <button id="submit-todo-edit">Save</button>
+            </fieldset>
+          </form>
         </div>
-        
-        <div id="default-section">
-        </div>
+      </div>
 
-        <div id="container">
-        </div>
+      <div id="default-section"></div>
+
+      <div id="container"></div>
     </main>
     <script src="main.js"></script>
-</body>
+  </body>
 </html>
